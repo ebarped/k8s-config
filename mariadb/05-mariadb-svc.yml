@@ -10,5 +10,5 @@ spec:
   - name: tcp
     port: 3306
   selector:
-    k8s-app: misp-mariadb
+    k8s-app: mariadb
 
