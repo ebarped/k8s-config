@@ -1,0 +1,39 @@
+apiVersion: apps/v1 # <api-group>/<api-version>
+kind: Deployment # tipo de objeto/recurso
+metadata:
+  name: nginx
+  namespace: default # si no ponemos nada, despliega en namespace default
+  labels:
+    k8s-app: nginx
+spec: # spec del objeto, en este caso deployment
+  replicas: 1 # pod réplicas
+  selector:
+    matchLabels:
+      k8s-app: nginx
+  template: # spec del pod
+    metadata:
+      labels:
+        k8s-app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.18.0
+        ports:
+        - name: http
+          containerPort: 80 # exponemos internamente el puerto 80
+          protocol: TCP
+        - name: https
+          containerPort: 443 # exponemos internamente el puerto 443
+          protocol: TCP
+        volumeMounts:
+        - name: nginx-config
+          mountPath: /etc/nginx/conf.d
+        - name: nginx-certs
+          mountPath: /etc/ssl/certs
+      volumes:
+       - name: nginx-config
+         configMap:
+           name: nginx-conf
+       - name: nginx-certs
+         secret:
+           secretName: nginx-certs
