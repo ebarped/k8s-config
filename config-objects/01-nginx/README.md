@@ -1,6 +1,6 @@
 ## Despliegue básico
 
-Podemos ver que el **Deployment** de **nginx** monta un **ConfigMap** y un **Secret** como volúmenes.
+Podemos ver que el **Deployment** de **nginx** monta un **ConfigMap** y un **Secret** como ficheros.
 
 El **ConfigMap** almacena la configuración de **nginx.**
 
@@ -19,13 +19,13 @@ cat 02-nginx-secret.yml  | grep localhost.key | awk '{print $2}' | base64 -d
 **Desplegamos** **nginx**:
 
 ```bash
-kubectl apply -f 01-nginx
+kubectl apply -f 02-nginx-secret.yml -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml 
 ```
 
 **Obtenemos** la **IP** de nuestra máquina **Vagrant**:
 
 ```bash
-ip a |grep enp
+ip a | grep enp
 ```
 
 **Obtenemos** los **NodePorts** de nuestro servicio **nginx**:
@@ -39,7 +39,7 @@ kubectl get svc nginx
 Limpiamos los recursos:
 
 ```bash
-kubectl delete -f 01-nginx
+kubectl delete -f 02-nginx-secret.yml -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml 
 ```
 
 

@@ -1,0 +1,1 @@
+Podemos ver que, al no usar la abstracción **PersistentVolumeClaim-PersistentVolume**, el **manifest** del **pod** mantiene los **detalles** del **almacenamiento**, en este caso, la **localización física** del mismo (/var/mariadb)
