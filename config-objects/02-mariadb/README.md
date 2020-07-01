@@ -1,6 +1,4 @@
-## Despliegue básico
-
-Podemos ver que el **StatefulSet** de **MariaDB** monta pares key-value de un **Secret** como variables de entorno.
+Podemos ver que el **StatefulSet** de **MariaDB** monta pares **key-value** de un **Secret** como **variables de entorno**.
 
 
 El **Secret** almacena las **credenciales** utilizadas en la **config**, codificadas en **base64**:
@@ -50,3 +48,4 @@ Limpiamos los recursos:
 ```bash
 kubectl delete -f 02-mariadb-secret.yml -f 05-mariadb-svc.yml -f 06-mariadb-sts.yml
 ```
+

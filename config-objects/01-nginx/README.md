@@ -1,5 +1,3 @@
-## Despliegue básico
-
 Podemos ver que el **Deployment** de **nginx** monta un **ConfigMap** y un **Secret** como ficheros.
 
 El **ConfigMap** almacena la configuración de **nginx.**
@@ -19,7 +17,7 @@ cat 02-nginx-secret.yml  | grep localhost.key | awk '{print $2}' | base64 -d
 **Desplegamos** **nginx**:
 
 ```bash
-kubectl apply -f 02-nginx-secret.yml -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml 
+kubectl apply -f 02-nginx-secret.yml -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml
 ```
 
 **Obtenemos** la **IP** de nuestra máquina **Vagrant**:
@@ -39,7 +37,7 @@ kubectl get svc nginx
 Limpiamos los recursos:
 
 ```bash
-kubectl delete -f 02-nginx-secret.yml -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml 
+kubectl delete -f 02-nginx-secret.yml -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml
 ```
 
 
@@ -55,9 +53,15 @@ kubectl create secret generic nginx-certs --from-file=certs/localhost.crt --from
 **Recreamos** el **despliegue** sin **02-nginx-secret.yml**:
 
 ```bash
-kubectl apply -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml 
+kubectl apply -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml
 ```
 
 **Volvemos** a **comprobar** desde el **navegador** con los nuevos **NodePorts**.
 
 **Limpiamos** los **recursos** creados.
+
+```bash
+kubectl delete -f 03-nginx-cm.yml -f 05-nginx-svc.yml -f 06-nginx-deploy.yml
+```
+
+
