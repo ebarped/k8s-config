@@ -49,3 +49,27 @@ Limpiamos los recursos:
 kubectl delete -f 02-mariadb-secret.yml -f 05-mariadb-svc.yml -f 06-mariadb-sts.yml
 ```
 
+
+### Buenas prácticas
+
+:warning: No se deben almacenar los **Secrets** en el **Version Control System**.
+
+```bash
+kubectl create secret generic mariadb-secret --from-literal=mysql_database=mariadb --from-literal=mysql_user=mariadb --from-literal=mysql_password=mariadb_pass --from-literal=mysql_root_password=mariadb_root_pass
+```
+
+**Recreamos** el **despliegue** sin **02-mariadb-secret.yml**:
+
+```bash
+kubectl apply -f 05-mariadb-svc.yml -f 06-mariadb-sts.yml
+```
+
+**Volvemos** a **comprobar** con **mysql** con el nuevo **NodePort**.
+
+**Limpiamos** los **recursos** creados.
+
+```bash
+kubectl delete -f 05-mariadb-svc.yml -f 06-mariadb-sts.yml
+```
+
+
